@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using RNCValidator.Models;
 using RNCValidator.Services;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace RNCValidator.ViewModels
@@ -32,8 +33,21 @@ namespace RNCValidator.ViewModels
 
         public async void GetRNC()
         {
-            this.Contributor = await _apiService.GetContributorAsync(RNC);
-            HasContributor = this.Contributor != null;
+            try
+            {
+                HasContributor = false;
+                if(Connectivity.NetworkAccess != NetworkAccess.Internet)
+                {
+                    await App.Current.MainPage.DisplayAlert("No Internet Connection", "Can not get RNC information because there is no internet connection available. Please connect to the internet and try again.", "OK");
+                    return;
+                }
+                this.Contributor = await _apiService.GetContributorAsync(RNC);
+                HasContributor = this.Contributor != null;
+            }
+            catch(Exception e)
+            {
+                await App.Current.MainPage.DisplayAlert("An Error Occured", "Could not load data for given RNC, please verify that it is written correctly.", "OK");
+            }
 
         }
 
