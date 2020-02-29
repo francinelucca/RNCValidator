@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RNCValidator.Views.RNCValidatorPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <StackLayout Margin="10">
+        <Label Text="Insert your RNC:"/>
+        <Entry Text="{Binding RNC}"/>
+        <Button Text="Validate"
+                TextColor="White"
+                BackgroundColor="Black"
+                Command="{Binding GetRNCCommand}"/>
+        <Grid x:Name="RNCGridView"
+              IsVisible="{Binding HasContributor}">
+        <Label Text="Result:"
+               Grid.Row="0"
+               Grid.Column="0"/>
+        <Label Text="Rnc:"
+               Grid.Row="1"
+               Grid.Column="0"/>
+        <Label Text="{Binding Contributor.RNC}"
+               Grid.Row="1"
+               Grid.Column="1"
+               HorizontalOptions="EndAndExpand"/>
+        <Label Text="Name:"
+               Grid.Row="2"
+               Grid.Column="0"/>
+        <Label Text="{Binding Contributor.Name}"
+               Grid.Row="2"
+               Grid.Column="1"
+               HorizontalOptions="EndAndExpand"/>
+        <Label Text="Comercial Name:"
+               Grid.Row="3"
+               Grid.Column="0"/>
+        <Label Text="{Binding Contributor.ComercialName}"
+               Grid.Row="3"
+               Grid.Column="1"
+               HorizontalOptions="EndAndExpand"/>
+        <Label Text="Category:"
+               Grid.Row="4"
+               Grid.Column="0"/>
+        <Label Text="{Binding Contributor.Category}"
+               Grid.Row="4"
+               Grid.Column="1"
+               HorizontalOptions="EndAndExpand"/>
+        <Label Text="Payment Regimen:"
+               Grid.Row="5"
+               Grid.Column="0"/>
+        <Label Text="{Binding Contributor.PaymentRegimen}"
+               Grid.Row="5"
+               Grid.Column="1"
+               HorizontalOptions="EndAndExpand"/>
+        <Label Text="Payment Status:"
+               Grid.Row="6"
+               Grid.Column="0"/>
+        <Label Text="{Binding Contributor.PaymentStatus}"
+               Grid.Row="6"
+               Grid.Column="1"
+               HorizontalOptions="EndAndExpand"/>
+
+        </Grid>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
