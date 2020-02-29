@@ -10,15 +10,22 @@ namespace RNCValidator.Services
     {
         public async Task<Contributor> GetContributorAsync(string rnc)
         {
-            Contributor contributor = null;
-            HttpClient httpClient = new HttpClient();
-            var response = await httpClient.GetAsync(String.Format("https://api.marcos.do/rnc/{0}", rnc));
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var responseString = await response.Content.ReadAsStringAsync();
-                contributor = JsonConvert.DeserializeObject<Contributor>(responseString);
+                Contributor contributor = null;
+                HttpClient httpClient = new HttpClient();
+                var response = await httpClient.GetAsync(String.Format("https://api.marcos.do/rnc/{0}", rnc));
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseString = await response.Content.ReadAsStringAsync();
+                    contributor = JsonConvert.DeserializeObject<Contributor>(responseString);
+                }
+                return contributor;
             }
-            return contributor;
+            catch(Exception e)
+            {
+                throw new Exception("Could not get RNC information. Please check RNC provided and try again.");
+            }
         }
     }
 }

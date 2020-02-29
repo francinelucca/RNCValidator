@@ -46,7 +46,7 @@ namespace RNCValidator.ViewModels
             }
             catch(Exception e)
             {
-                await App.Current.MainPage.DisplayAlert("An Error Occured", "Could not load data for given RNC, please verify that it is written correctly.", "OK");
+                await App.Current.MainPage.DisplayAlert("An Error Occured", e.Message , "OK");
             }
 
         }
